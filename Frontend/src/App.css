@@ -1,63 +1,244 @@
 * {
-  margin: 0%;
-  padding: 0%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #010409;
+  color: #e6edf3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 16px;
+  gap: 16px;
+}
+
+.left, .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+
+.code-container {
+  flex: 1;
+  overflow: auto;
+  background-color: #0d1117;
+  border-radius: 8px;
+}
+
+/* Force visible text color inside the react-simple-code-editor layer */
+.code-container textarea,
+.code-container pre,
+.code-container code {
+  color: #ffffff !important;
+  outline: none !important;
+}
+
+/* Brighten Prism syntax tokens so they stand out sharply */
+.token.plain-text,
+.token.variable,
+.token.property,
+.token.operator {
+  color: #79c0ff !important;
+}
+
+.review-btn {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background-color: #238636;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.review-btn:hover {
+  background-color: #2ea043;
+}
+
+.review-btn:disabled {
+  background-color: #23863680;
+  cursor: not-allowed;
+}
+
+.review-container {
+  height: 100%;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 16px;
+  overflow:auto;
+}
+
+/* Markdown preview formatting */
+.review-container pre {
+  background-color: #161b22;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 12px 0;
+}
+
+/* Layout Wrappers */
+.right, 
+.review-container {
+  height: 100%;
+  width: 100%;
+  background-color: #0d1117;
+  color: #e6edf3; /* Crisp default text color */
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px;
+  overflow-y: auto; /* Allow smooth vertical scrolling */
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
-  height: 100%;
-  width: 100%;
+/* Ensure Markdown Headers Pop */
+.review-container h1,
+.review-container h2,
+.review-container h3,
+.review-container h4 {
+  color: #ffffff !important;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 6px;
 }
 
-main {
-  height: 100%;
-  width: 100%;
-  padding: 1.5rem;
+/* Force Body Text, Lists, & Paragraphs to be Bright and Visible */
+.review-container p,
+.review-container li,
+.review-container span,
+.review-container div {
+  color: #d2a8ff !important; /* Soft bright purple/light grey tone for high contrast */
+  color: #e6edf3 !important; /* Standard bright readable text */
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Make Strong/Bold Text Pop in White */
+.review-container strong,
+.review-container b {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+/* Fix Bullet Point Styling */
+.review-container ul,
+.review-container ol {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.review-container li {
+  margin-bottom: 6px;
+}
+
+/* Code Blocks Inside Markdown Output */
+.review-container pre {
+  background-color: #161b22 !important;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 16px;
+  margin: 16px 0;
+  overflow-x: auto; /* Enable horizontal scroll for long code lines */
+}
+
+/* Inline Code Snippets (e.g. `sum(1, 2)`) */
+.review-container code:not(pre code) {
+  background-color: rgba(110, 118, 129, 0.4);
+  color: #f0f6fc;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 85%;
+  font-family: monospace;
+}
+
+/* Horizontal Divider Rules */
+.review-container hr {
+  height: 1px;
+  background-color: #30363d;
+  border: none;
+  margin: 20px 0;
+}
+/* Layout Wrapper */
+.app-wrapper {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #010409;
+  overflow: hidden;
 }
 
-main .left,
-main .right {
-  height: 100%;
-  flex-basis: 50%;
-  border-radius: 0.7rem;
+/* Header Styles */
+.app-header {
+  height: 60px;
+  background-color: #0d1117;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  flex-shrink: 0;
 }
 
-main .left {
-  background-color: #000000;
-  position: relative;
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.left .code,
-.code pre,
-.code pre code {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  border-radius: 0.7rem;
-  background-color: #0c0c0c;
+.logo-icon {
+  font-size: 20px;
 }
 
-main .left .review {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background-color: rgb(219, 219, 255);
-  color: #000000;
-  padding: 0.5rem 2rem;
+.header-brand h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #f0f6fc;
+  letter-spacing: -0.3px;
+}
+
+.header-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(46, 160, 67, 0.15);
+  border: 1px solid rgba(46, 160, 67, 0.4);
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #3fb950;
+  font-size: 12px;
   font-weight: 500;
-  cursor: pointer;
-  user-select: none;
-  border-radius: 0.7rem;
 }
 
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ea043;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #2ea043;
+}
 
-main .right {
-  background-color: #343434;
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  overflow: auto;
+/* Adjust Main Container to take remaining height */
+.container {
+  flex: 1;
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+  height: calc(100vh - 60px);
 }

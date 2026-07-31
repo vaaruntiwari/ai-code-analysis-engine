@@ -1,9 +1,13 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { GoogleGenAI } = require("@google/genai");
+const ai = new GoogleGenAI({apiKey:process.env.GOOGLE_GEMINI_KEY});
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_KEY);
-const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash",
-    systemInstruction: `
+
+async function generateContent(prompt) {
+  const interaction = await ai.interactions.create({
+    model: "gemini-3.6-flash",
+    input: prompt, // Notice it uses 'input'
+    system_instruction:
+    `
                 Here’s a solid system instruction for your AI code reviewer:
 
                 AI System Instruction: Senior Code Reviewer (7+ Years of Experience)
@@ -77,16 +81,9 @@ const model = genAI.getGenerativeModel({
 
                 Would you like any adjustments based on your specific needs? 🚀 
     `
-});
-
-
-async function generateContent(prompt) {
-    const result = await model.generateContent(prompt);
-
-    console.log(result.response.text())
-
-    return result.response.text();
-
+  });
+  
+  return interaction.output_text; // Simple flat string
 }
 
-module.exports = generateContent    
+module.exports=generateContent
