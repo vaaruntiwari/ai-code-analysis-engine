@@ -1,6 +1,6 @@
 # 🚀 Code Analysis Engine
 
-> An AI-powered code reviewer that analyzes your code using **Google Gemini 1.5 Flash** and provides professional feedback, refactored code, and optimization suggestions.
+> An AI-powered code reviewer that analyzes your code using **Google Gemini 3.6 Flash** and provides professional feedback, refactored code, and optimization suggestions.
 
 ## ✨ Features
 
@@ -49,7 +49,7 @@
         | Gemini API
         |
 +-------v--------+
-| Gemini 1.5 Flash|
+| Gemini 3.6 Flash|
 +----------------+
 ```
 
